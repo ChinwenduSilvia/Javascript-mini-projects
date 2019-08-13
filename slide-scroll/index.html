@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="site-wrap">
+        <h1>Scrolling Slide</h1>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eveniet modi nam, in nesciunt sapiente ab consequuntur provident laborum aut veritatis qui quia quaerat impedit!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eveniet modi nam, in nesciunt sapiente ab consequuntur provident laborum aut veritatis qui quia quaerat impedit!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eveniet modi nam, in nesciunt sapiente ab consequuntur provident laborum aut veritatis qui quia quaerat impedit!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eveniet modi nam, in nesciunt sapiente ab consequuntur provident laborum aut veritatis qui quia quaerat impedit!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eveniet modi nam, in nesciunt sapiente ab consequuntur provident laborum aut veritatis qui quia quaerat impedit!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis eveniet modi nam, in nesciunt sapiente ab consequuntur provident laborum aut veritatis qui quia quaerat impedit!</p>
+
+        <img src="logo.png" class="align-left slide-in">
+
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio, quia.</p>
+
+        <img src="why-smile-like-that.jpg" class="align-right slide-in">
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, dolores! Sed obcaecati corporis temporibus perferendis?</p>
+
+        <img src="why-smile-like-that.jpg" class="align-left slide-in">
+
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit recusandae, in commodi expedita ut ipsa?</p>
+
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam delectus vel vero ducimus odio non?</p>
+
+        <img src="logo.png" class="align-right slide-in">
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, maiores!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sed quaerat aut quos modi neque.</p>
+    </div>
+    <script>
+        function debounce(func, wait = 20, immediate = true) {
+            var timeout;
+            return function() {
+                var context = this, args = arguments;
+                var later = function() {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                };
+                var callNow = immediate && !timeout;
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow) func.apply(context, args);
+            };
+        };
+
+        const sliderImages = document.querySelectorAll('.slide-in');
+
+        function checkSlide() {
+            sliderImages.forEach(sliderImage => {
+                const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2;
+
+                const imageBottom = sliderImage.offsetTop + sliderImage.height;
+                const isHalfShown = slideInAt > sliderImage.offsetTop;
+                const isNotScrolledPast = window.scrollY < imageBottom;
+                if (isHalfShown && isNotScrolledPast) {
+                    sliderImage.classList.add('active');
+                } else {
+                    sliderImage.classListremove('active');
+                }
+            });
+        }
+    window.addEventListener('scroll', debounce(checkSlide));
+    </script>
+    <style>
+    html {
+        box-sizing: border-box;
+        background: #ffc600;
+        font-family: 'helvetica neue';
+        font-size: 20px;
+        font-weight: 200;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+
+    .site-wrap {
+        max-width: 700px;
+        margin: 100px auto;
+        background: white;
+        padding: 40px;
+        text-align: justify;
+    }
+
+    .align-left {
+        float: left;
+        margin-right: 20px;
+    }
+
+    .align-right {
+        float: right;
+        margin-left: 20px;
+    }
+
+    .slide-in {
+        opacity: 0;
+        transition: all .5s;
+    }
+
+    .align-left.slide-in {
+        transform: translate(-30%) scale(0.95);
+    }
+
+    .align-right.slide-in {
+        transform: translateX(30%) scale(0.95);
+    }
+
+    .slide-in.active {
+        opacity: 1;
+        transform: translate(0%) scale(1);
+    }
+    </style>
+</body>
+</html>

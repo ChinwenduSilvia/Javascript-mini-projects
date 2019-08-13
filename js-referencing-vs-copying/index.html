@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    const players = ['Ada', 'Ngozi', 'Emeka', 'Dinma'];
+    const team = players;
+    console.log(players, team);
+
+    const team2 = players.slice();
+    const team3 = [].concat(players);
+    const team4 = [...players];
+    team4[3] = 'global figure';
+    console.log(team4);
+    const team5 = Array.from(players);
+    
+    const person = { name: 'Angela', age: 67};
+    
+    const cap2 = Object.assign({}, person, { number: 42, age: 56});
+    console.table(cap2);
+
+    const mang = {name: 'Nike', age: 100, social: { twitter: '@fakename', facebook: '@fakename'} };
+    // console.clear();
+    console.table(mang);
+
+    const dev = Object.assign({}, mang);
+    const dev2 =JSON.parse(JSON.stringify(mang));
+    console.table (dev, dev2);
+
+    </script>
+</body>
+</html>
